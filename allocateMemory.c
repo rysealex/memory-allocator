@@ -84,6 +84,10 @@ int *createUsableBlockContainer(int *blockContainer, int numFreeBlocks, int memo
             tempCount++; // increment tempCount
         }
     }
+
+    // de-allocate memory in blockContainer
+    free(blockContainer);
+
     // return the invoked sortUsableBlockContainer function (a sorted representation of usableBlockContainer)
     return sortUsableBlockContainer(tempContainer, tempCount);
 }
@@ -143,6 +147,9 @@ stack2d blockSubsets(int *container, int containerSize)
 
     // invoke the calcSubset function to calculate all possible subsets from the container
     calcBlockSubset(container, containerSize, &s2d, &s, index);
+
+    // de-allocate memory in container
+    free(container);
 
     return s2d; // all the possible block subsets from the container
 }
@@ -306,4 +313,11 @@ void findStackSolutions(struct stack2d *s2d, int containerSize, int memoryReq)
     }
     // invoke the displayBestSolutions function to display all solutions starting with the best first
     displayBestSolutions(solutionsContainer, containerSize, numSolutions);
+
+    // de-allocate memory in solutionsContainer
+    for (int i = 0; i < subsetSize; i++)
+    {
+        free(solutionsContainer[i]); // de-allocating columns
+    }
+    free(solutionsContainer); // de-allocating rows
 }
