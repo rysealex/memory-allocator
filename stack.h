@@ -9,7 +9,7 @@
 #include <stdlib.h>
 
 // symbolic constant for maximum size of stack
-#define MAX 100
+#define MAX 1000
 
 // create a 1D stack
 typedef struct stack
